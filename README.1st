@@ -24,3 +24,30 @@ With a small code change you can customize:
 - The character used for header and footer
 - Customize the way the date is formatted
 
+TestData is used to show how this works and Test contains the main method.
+
+In Test.java there is a presentation of how this is implemented:
+
+    // now get the TextPrint and proceed
+        List<TextPrintColumnConfig> config = new ArrayList<TextPrintColumnConfig>();
+        config.add(new TextPrintColumnConfig("Amount", "getAmount", true, false));
+        config.add(new TextPrintColumnConfig("Total", "getTotal", true, false));
+        config.add(new TextPrintColumnConfig("Name", "getName", false, false));
+        config.add(new TextPrintColumnConfig("Surname", "getSurname", false, false));
+        config.add(new TextPrintColumnConfig("Start Date", "getDtStart", true, false));
+        config.add(new TextPrintColumnConfig("Other", "getOther", false, false));
+
+        PrintWriter wrt = new PrintWriter(System.out);
+        TextPrint printer = new TextPrint(items, config, wrt);
+        printer.print();
+        wrt.flush();
+        wrt.close();
+
+     - A list of value objects is provided. The items in the list should expose the same getters
+     - Then the TextPrint is initialized with the following parameters:
+         a) items: the list of value objects
+         b) config: a list of TextPrintColumnConfig - one for each column
+         c) wrt: PrintWriter class generated around the output stream used for rendering the results
+
+    The end of line used to split the text lines is taken from the System properties.
+
