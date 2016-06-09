@@ -28,7 +28,15 @@ TestData is used to show how this works and Test contains the main method.
 
 In Test.java there is a presentation of how this is implemented:
 
-    // now get the TextPrint and proceed
+        // prepare the list of value objects
+        List<TestData> items = new ArrayList<TestData>();
+        for(int count = 0; count < 10; count ++){
+            TestData item = new TestData(20 + count, 30D + count, "name: " + count, "sur name " + count, new Date(), "other " + count);
+
+            items.add(item);
+        }
+        
+        // now get the TextPrint and proceed
         List<TextPrintColumnConfig> config = new ArrayList<TextPrintColumnConfig>();
         config.add(new TextPrintColumnConfig("Amount", "getAmount", true, false));
         config.add(new TextPrintColumnConfig("Total", "getTotal", true, false));
